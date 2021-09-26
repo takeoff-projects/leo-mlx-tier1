@@ -32,7 +32,7 @@ resource "null_resource" "cloud-datastore-indices" {
 resource "null_resource" "empty-index-file" {
   triggers = {
     empty_index_file = local.null_index_path_file
-    project = ${var.project}
+    project = var.project
   }
 }
 
