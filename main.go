@@ -45,15 +45,15 @@ func main() {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	var pets []Pet
-	pets, error := GetPets()
+	var decs []Decision
+	decs, error := GetDecs()
 	if error != nil {
 		fmt.Print(error)
 	}
 
 	data := HomePageData{
-		PageTitle: "Pets Home Page",
-		Pets: pets,
+		PageTitle: "Kherson city council decisions ",
+		Decs: decs,
 	}
 
 	var tpl = template.Must(template.ParseFiles("templates/index.html", "templates/layout.html"))
@@ -92,7 +92,7 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 // HomePageData for Index template
 type HomePageData struct {
 	PageTitle string
-	Pets []Pet
+	Decs []Decision
 }
 
 // AboutPageData for About template
@@ -100,25 +100,20 @@ type AboutPageData struct {
 	PageTitle string
 }
 
-type Pet struct {
+type Decision struct {
 	Added   time.Time `datastore:"added"`
-	Caption string    `datastore:"caption"`
-	Email   string    `datastore:"email"`
-	Image   string    `datastore:"image"`
-	Likes   int       `datastore:"likes"`
-	Owner   string    `datastore:"owner"`
-	Petname string    `datastore:"petname"`
+	Link    string    `datastore:"link"`
 	Name    string     // The ID used in the datastore.
 }
 
-func GetPets() ([]Pet, error) {
+func GetDecs() ([]Decision, error) {
 
 	projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
 	if projectID == "" {
 		log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
 	}
 
-	var pets []Pet
+	var decs []Decision
 	ctx := context.Background()
 	client, err := datastore.NewClient(ctx, projectID)
 	if err != nil {
@@ -126,8 +121,8 @@ func GetPets() ([]Pet, error) {
 	}
 
 	// Create a query to fetch all Pet entities".
-	query := datastore.NewQuery("Pet").Order("-likes")
-	keys, err := client.GetAll(ctx, query, &pets)
+	query := datastore.NewQuery("Decisions").Order("-added")
+	keys, err := client.GetAll(ctx, query, &decs)
 	if err != nil {
 		fmt.Println(err)
 		return nil, err
@@ -135,9 +130,9 @@ func GetPets() ([]Pet, error) {
 
 	// Set the id field on each Task from the corresponding key.
 	for i, key := range keys {
-		pets[i].Name = key.Name
+		decs[i].Name = key.Name
 	}
 
 	client.Close()
-	return pets, nil
+	return decs, nil
 }
