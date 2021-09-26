@@ -36,9 +36,9 @@ func PutDecs(links []string) {
 		log.Fatalf("Could not create datastore client: %v", err)
 	}
 
-	var keys  []*datastore.Key{
-		datastore.NewIncompleteKey(ctx, "Task", nil),
-		datastore.NewIncompleteKey(ctx, "Task", nil),
+	keys := []*datastore.Key{
+		datastore.NewIncompleteKey(ctx, "Decision", nil),
+		datastore.NewIncompleteKey(ctx, "Decision", nil),
 	}
 
 	for i:=0; i<len(links); i++ {
