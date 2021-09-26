@@ -72,7 +72,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
 	data := AboutPageData{
-		PageTitle: "About Go Pets",
+		PageTitle: "About this project",
 	}
 
 	var tpl = template.Must(template.ParseFiles("templates/about.html", "templates/layout.html"))
