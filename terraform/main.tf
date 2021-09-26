@@ -41,6 +41,6 @@ module "datastore" {
   project     = "roi-takeoff-user7"
   indexes     = "index.yaml"
   depends_on = [
-   google_project_service.api2 
+   google_project_service.api 
   ]
 }

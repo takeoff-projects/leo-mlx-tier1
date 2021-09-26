@@ -1,4 +1,4 @@
-resource "google_project_service" "api1" {
+resource "google_project_service" "api" {
   for_each = toset(var.project_apis)
 
   service = each.value
