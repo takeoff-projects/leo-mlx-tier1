@@ -39,7 +39,7 @@ module "datastore" {
   source      = "./terraform-google-cloud-datastore"
 #  credentials = "${path.module}/main_sa.json"
   project     = "roi-takeoff-user7"
-  indexes     = "${file(index.yaml)}"
+  indexes     = "index.yaml"
   depends_on = [
     local_file.main_sa_json
   ]
