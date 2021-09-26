@@ -51,7 +51,6 @@ func PutDecs(links []string) {
 	}
 }
 
-
 func parsePage(page_link string) []string {
 	response, err := http.Get(page_link)
 	match_sli := make([]string, 10)
@@ -62,28 +61,23 @@ func parsePage(page_link string) []string {
 	defer response.Body.Close()
 	body,err := ioutil.ReadAll(response.Body)
         bodyString := string(body)
-	re, _ := regexp.Compile("https://github.com/[a-z0-9A-Z-]+/[a-z0-9A-Z-]+&quot;")
+	re, _ := regexp.Compile("https://miskrada.kherson.ua/wp-content/uploads/[0-9]+/[0-9]+/[a-z0-9-]+.pdf")
 	match := re.FindAllStringSubmatchIndex(bodyString,-1)
-
 	for i:=0; i<len(match); i++ {
-		separate_link_temp:=bodyString[match[i][0]:match[i][1]]
-		separate_link:=strings.ReplaceAll(separate_link_temp, "&quot;", "")
+		separate_link:=bodyString[match[i][0]:match[i][1]]
 		match_sli=append(match_sli,separate_link)
 	}
 
 	return match_sli
 }
 
-
 func main() {
-	URL:="https://github.com/search?q=gcp+datastore"
-	p1URL:="https://github.com/search?p="
-	p2URL:="&q=gcp+datastore&type=Repositories"
+	URL:="https://miskrada.kherson.ua/act_cat/rishennia-miskoi-rady/"
+	pURL:="https://miskrada.kherson.ua/act_cat/rishennia-miskoi-rady/?sf_paged="
 	var number_of_pages int
+//	all_links_sli_temp := make([]string, 1000)
 	var all_links_sli_temp []string
 	var all_links_sli []string
-
-
 	response, err := http.Get(URL)
 	if err != nil {
            fmt.Println(err)
@@ -95,12 +89,10 @@ func main() {
 	body,err := ioutil.ReadAll(response.Body)
 	bodyString := string(body)
 //	fmt.Println(bodyString)
-	if strings.ContainsAny(bodyString, "<a class=\"next_page\"") {
-		re, _ := regexp.Compile(">[0-9]+</a> <a class=\"next_page\"")
+	if strings.ContainsAny(bodyString, "max_num_pages&quot;:") {
+		re, _ := regexp.Compile("max_num_pages&quot;:[0-9]+")
 		match := re.FindString(bodyString)
-		temp_str := strings.ReplaceAll(match, "</a> <a class=\"next_page\"", "")
-		temp_str2 := strings.ReplaceAll(temp_str, ">", "")
-		number_of_pages, err = strconv.Atoi(temp_str2)
+		number_of_pages, err = strconv.Atoi(strings.ReplaceAll(match, "max_num_pages&quot;:", ""))
 	        if err != nil {
         	   fmt.Println(err)
 	           return
@@ -112,14 +104,17 @@ func main() {
 
 //Iterator accross pages
 	for i:=1; i<=number_of_pages; i++ {
-		specific_URL := p1URL + strconv.Itoa(i) + p2URL
-//		fmt.Println(specific_URL)
+		specific_URL := pURL + strconv.Itoa(i)
+	//	fmt.Println(specific_URL)
+	//	fmt.Println("Call function")
 		extracted_direct_link := parsePage(specific_URL)
 		for j:=0; j<len(extracted_direct_link); j++ {
 		    all_links_sli_temp = append(all_links_sli_temp, extracted_direct_link[j])
 		}
-//		fmt.Println(extracted_direct_link)
+	//	fmt.Println(extracted_direct_link)
 	}
+
+//fmt.Println(all_links_sli)
 
 	for _, element := range all_links_sli_temp {
 		if element != "" {
@@ -127,8 +122,13 @@ func main() {
 		}
 	}
 
-/*	for _, element := range all_links_sli {
+	for _, element := range all_links_sli {
 		fmt.Println(element)
-	}*/
+	}
 
+	PutDecs(all_links_sli)
 }
+
+
+
+
