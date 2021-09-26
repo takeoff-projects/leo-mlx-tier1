@@ -88,7 +88,7 @@ func main() {
 
 	body,err := ioutil.ReadAll(response.Body)
 	bodyString := string(body)
-	fmt.Println(bodyString)
+//	fmt.Println(bodyString)
 	if strings.ContainsAny(bodyString, "max_num_pages&quot;:") {
 		re, _ := regexp.Compile("max_num_pages&quot;:[0-9]+")
 		match := re.FindString(bodyString)
