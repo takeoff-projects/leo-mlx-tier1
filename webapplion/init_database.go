@@ -44,7 +44,7 @@ func PutDecs(links []string) {
 		e := new(Decision)
 		e.Added = time.Now()
 		e.Link  = links[i]
-		if err2 := client.Put(ctx, k, e); err2 != nil {
+		if _, err2 := client.Put(ctx, k, e); err2 != nil {
                 	log.Fatal(err2)
 	        }
 
