@@ -27,14 +27,10 @@ resource "local_file" "cloud-datastore-index-file" {
 resource "null_resource" "cloud-datastore-indices" {
   triggers = {
     changes_in_index_file = sha1(local_file.cloud-datastore-index-file.content)
-  }
-
-resource "null_resource" "empty-index-file" {
-  triggers = {
     empty_index_file = local.null_index_path_file
     project = var.project
   }
-}
+
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-indexes.sh 'var.project' '${local_file.cloud-datastore-index-file.filename}'"
