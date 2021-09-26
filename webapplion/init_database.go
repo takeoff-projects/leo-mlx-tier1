@@ -9,6 +9,8 @@ import (
     "net/http"
     "context"
     "time"
+    "os"
+    "log"
 
     "cloud.google.com/go/datastore"
 )
