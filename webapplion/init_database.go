@@ -42,7 +42,8 @@ func PutDecs(links []string) {
 		decs[i].Link  = links[i]}
 	}
 
-	if _, err := client.PutMulti(ctx, keys, decs); err != nil {
+	_, err := client.PutMulti(ctx, keys, decs)
+	if err != nil {
 		log.Fatal(err)
 	}
 }
