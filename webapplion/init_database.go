@@ -36,15 +36,15 @@ func PutDecs(links []string) {
 		log.Fatalf("Could not create datastore client: %v", err)
 	}
 
-	keys  := []*datastore.Key
+//	keys  := []*datastore.Key
 
 	for i:=0; i<len(links); i++ {
-		keys[i] = datastore.Namekey("Id", strconv.Itoa(i), nil)
+//		keys[i] = datastore.Namekey("Id", strconv.Itoa(i), nil)
 		decs[i].Added = time.Now()
 		decs[i].Link  = links[i]
 	}
 
-	_, err := client.PutMulti(ctx, keys, decs)
+	err := client.PutMulti(ctx,  decs)
 	if err != nil {
 		log.Fatal(err)
 	}
