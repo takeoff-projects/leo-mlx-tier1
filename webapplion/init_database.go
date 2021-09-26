@@ -40,8 +40,8 @@ func PutDecs(links []string) {
 	keys := make([]*datastore.Key, 200, 200)
 
 	for i:=0; i<len(links); i++ {
-//		keys[i] = datastore.NewIncompleteKey(ctx, "Decision", nil)
-		keys[i] = datastore.Namekey("Id", strconv.Itoa(i), nil)
+		keys[i] = datastore.NewIncompleteKey(ctx, "Decision", nil)
+//		keys[i] = datastore.Namekey("Id", strconv.Itoa(i), nil)
 		decs[i].Added = time.Now()
 		decs[i].Link  = links[i]
 	}
