@@ -37,11 +37,11 @@ resource "null_resource" "empty-index-file" {
 }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/create-indexes.sh '${var.project}' '${local_file.cloud-datastore-index-file.filename}'"
+    command = "${path.module}/scripts/create-indexes.sh 'var.project' '${local_file.cloud-datastore-index-file.filename}'"
   }
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/destroy-indexes.sh ${self.triggers.project} ${self.triggers.empty_index_file}"
-    when    = "destroy"
+    when    = destroy
   }
 }
