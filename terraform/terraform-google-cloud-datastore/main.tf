@@ -32,6 +32,7 @@ resource "null_resource" "cloud-datastore-indices" {
 resource "null_resource" "empty-index-file" {
   triggers = {
     empty_index_file = local.null_index_path_file
+    project = ${var.project}
   }
 }
 
@@ -40,7 +41,7 @@ resource "null_resource" "empty-index-file" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' ${self.triggers.empty_index_file}"
+    command = "${path.module}/scripts/destroy-indexes.sh ${self.triggers.project} ${self.triggers.empty_index_file}"
     when    = "destroy"
   }
 }
