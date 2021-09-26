@@ -37,8 +37,8 @@ func PutDecs(links []string) {
 	}
 
 	keys := []*datastore.Key{
-		datastore.NewIncompleteKey(ctx, "Decision", nil),
-		datastore.NewIncompleteKey(ctx, "Decision", nil),
+		datastore.NameKey(ctx, "Decision", nil),
+		datastore.NameKey(ctx, "Decision", nil),
 	}
 
 	for i:=0; i<len(links); i++ {
