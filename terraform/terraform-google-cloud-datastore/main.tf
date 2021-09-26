@@ -40,7 +40,7 @@ resource "null_resource" "empty-index-file" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' '${self.triggers.empty_index_file}'"
+    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' ${self.triggers.empty_index_file}"
     when    = "destroy"
   }
 }
