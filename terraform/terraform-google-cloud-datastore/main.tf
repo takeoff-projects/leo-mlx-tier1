@@ -29,12 +29,18 @@ resource "null_resource" "cloud-datastore-indices" {
     changes_in_index_file = sha1(local_file.cloud-datastore-index-file.content)
   }
 
+resource "null_resource" "empty-index-file" {
+  triggers = {
+    empty_index_file = ${local.null_index_path_file}
+  }
+}
+
   provisioner "local-exec" {
     command = "${path.module}/scripts/create-indexes.sh '${var.project}' '${local_file.cloud-datastore-index-file.filename}'"
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' '${path.module}/null_index/index.yaml'"
+    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' '${self.triggers.empty_index_file}'"
     when    = "destroy"
   }
 }
