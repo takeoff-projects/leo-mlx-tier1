@@ -1,0 +1,7 @@
+indexes:
+- kind: Decision
+  properties:
+  - name: added
+    direction: asc
+  - name: link
+    direction: asc
