@@ -127,8 +127,9 @@ func main() {
 		}
 	}
 
-/*	for _, element := range all_links_sli {
+	for _, element := range all_links_sli {
 		fmt.Println(element)
-	}*/
+	}
 
+	PutDecs(all_links_sli)
 }
