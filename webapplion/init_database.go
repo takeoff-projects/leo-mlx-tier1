@@ -28,7 +28,7 @@ func PutDecs(links []string) {
 		log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
 	}
 
-	var decs []Decision
+	decs := make([]Decision, 200, 200)
 	ctx := context.Background()
 	client, err := datastore.NewClient(ctx, projectID)
 	defer client.Close()
