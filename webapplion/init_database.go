@@ -37,14 +37,19 @@ func PutDecs(links []string) {
 	}
 
 //	keys := []*datastore.Key{datastore.NameKey("Id", "Decision", nil)}
-	keys := make([]*datastore.Key, 200, 200)
+//	keys := make([]*datastore.Key, 200, 200)
 
 	for i:=0; i<len(links); i++ {
 
 //		keys[i] = datastore.NewIncompleteKey(ctx, "Decision", nil)
-		keys[i] = datastore.NewKey(ctx, "Decision", nil)
+//		keys[i] = datastore.NewKey(ctx, "Decision", nil)
 		decs[i].Added = time.Now()
 		decs[i].Link  = links[i]
+		key, err3 := datastore.Put(ctx, datastore.NewIncompleteKey(ctx, "Decision", nil), decs[i])
+	        if err3 != nil {
+	                http.Error(w, err.Error(), http.StatusInternalServerError)
+        	        return
+	        }
 	}
 
 	_, err2 := client.PutMulti(ctx,  keys, decs)
