@@ -38,10 +38,11 @@ func PutDecs(links []string) {
 
 	for i:=0; i<len(links); i++ {
 		keys[i] = datastore.Namekey("Id", strconv.Itoa(i), nil)
-		decs[i] = {Added: time.Now(), Link: links[i]}
+		decs[i].Added = time.Now()
+		decs[i].Link  = links[i]}
 	}
 
-	if _, err := client.PutMulti(ctx, keys, posts); err != nil {
+	if _, err := client.PutMulti(ctx, keys, decs); err != nil {
 		log.Fatal(err)
 	}
 }
