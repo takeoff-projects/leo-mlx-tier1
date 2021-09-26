@@ -20,9 +20,8 @@ type Decision struct {
 }
 
 func PutDecs(links []string) {
-	defer client.Close()
 
-	projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
+	projectID := os.Getenv("GOOGLE_CLOUD_PROJECT")
 	if projectID == "" {
 		log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
 	}
@@ -30,6 +29,7 @@ func PutDecs(links []string) {
 	var decs []Decision
 	ctx := context.Background()
 	client, err := datastore.NewClient(ctx, projectID)
+	defer client.Close()
 	if err != nil {
 		log.Fatalf("Could not create datastore client: %v", err)
 	}
