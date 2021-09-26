@@ -34,7 +34,7 @@ resource "null_resource" "cloud-datastore-indices" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' '${local.null_index_path_file}'"
+    command = "${path.module}/scripts/destroy-indexes.sh '${var.project}' '${path.module}/null_index/index.yaml'"
     when    = "destroy"
   }
 }
