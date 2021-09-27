@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 	"context"
+	"github.com/gorilla/mux"
 
 	"cloud.google.com/go/datastore"
 )
@@ -31,19 +32,19 @@ func main() {
 	log.Printf("Port set to: %s", port)
 
 	fs := http.FileServer(http.Dir("assets"))
-	mux := http.NewServeMux()
+	myRouter := mux.NewRouter().StrictSlash(true)
 
 	// This serves the static files in the assets folder
-	mux.Handle("/assets/", http.StripPrefix("/assets/", fs))
+	myRouter.Handle("/assets/", http.StripPrefix("/assets/", fs))
 
 	// The rest of the routes
-	mux.HandleFunc("/", indexHandler)
-	mux.HandleFunc("/about", aboutHandler)
-	mux.HandleFunc("/items", getItemsHandler).Methods("GET")
+	myRouter.HandleFunc("/", indexHandler)
+	myRouter.HandleFunc("/about", aboutHandler)
+	myRouter.HandleFunc("/items", getItemsHandler).Methods("GET")
 
 
 	log.Printf("Webserver listening on Port: %s", port)
-	http.ListenAndServe(":"+port, mux)
+	http.ListenAndServe(":"+port, myRouter)
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
