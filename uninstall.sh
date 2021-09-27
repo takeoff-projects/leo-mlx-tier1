@@ -34,4 +34,5 @@ go run datastore_cleanup.go
 echo yes | gcloud datastore indexes cleanup index.yaml
 
 cd terraform
-terraform init && terraform destroy -auto-approve
+gcloud auth list
+terraform init && terraform destroy
