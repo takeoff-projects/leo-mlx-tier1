@@ -7,6 +7,8 @@ PeojectID="roi-takeoff-user7"
 if [ $GOOGLE_CLOUD_PROJECT == "" ]; then
 	export GOOGLE_CLOUD_PROJECT=$PeojectID
 fi
+
+gcloud auth application-default login
 echo "projectID="$GOOGLE_CLOUD_PROJECT
 
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
@@ -22,5 +24,7 @@ else
 	echo "Service account not created, we can't continue"
 	exit 1
 fi
+
+gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 #gcloud datastore databases create --region=us-central
 #gcloud datastore indexes create index.yaml
