@@ -44,7 +44,7 @@ func main() {
 		fmt.Println(err)
 	}
 
-	err = datastore.DeleteMulti(ctx, keys)
+	err = client.DeleteMulti(ctx, keys)
 	if err != nil {
                 fmt.Println(err)
         }
