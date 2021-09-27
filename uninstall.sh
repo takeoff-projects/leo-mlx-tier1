@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ###variable
-GOOGLE_ACCOUNT=touser7@roigcp.com
+#GOOGLE_ACCOUNT=touser7@roigcp.com
 
 ###check if commands installed
 if ! terraform_installed="$(type -p "terraform")" || [[ -z $terraform_installed ]]; then
@@ -18,19 +18,10 @@ if ! gcloud_installed="$(type -p "go")" || [[ -z $gcloud_installed ]]; then
 fi
 
 ROOT_PATH=$(pwd)
-cd terraform
+#cd terraform
 
-if [ -e main_sa.json ]; then
-        export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
-        echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
-else
-        echo "Service account key not found, we can't continue"
-        exit 1
-fi
-
-#echo yes | gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 gcloud auth application-default login
-gcloud config set account $GOOGLE_ACCOUNT
+#gcloud config set account $GOOGLE_ACCOUNT
 ##Here should be code to drop cloud run instance
 ################################################
 cd ${ROOT_PATH}/webapplion
@@ -39,5 +30,5 @@ cd ${ROOT_PATH}
 echo yes | gcloud datastore indexes cleanup ${ROOT_PATH}/index.yaml
 
 cd ${ROOT_PATH}/terraform
-
+gcloud auth list
 terraform init && terraform destroy
