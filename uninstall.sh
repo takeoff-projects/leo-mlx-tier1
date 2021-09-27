@@ -31,5 +31,6 @@ gcloud auth application-default login
 ################################################
 cd ${ROOT_PATH}
 echo yes | gcloud datastore indexes cleanup index.yaml
+
 cd terraform
-terraform destroy -auto-approve
+terraform init && terraform destroy -auto-approve
