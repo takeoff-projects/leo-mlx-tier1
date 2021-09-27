@@ -6,8 +6,8 @@ import (
 //	"html/template"
 	"log"
 //	"net/http"
-//	"os"
-//	"time"
+	"os"
+	"time"
 	"context"
 
 	"cloud.google.com/go/datastore"
@@ -22,6 +22,9 @@ type Decision struct {
 }
 
 func main() {
+
+	var decs []Decision
+
 	projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
 	if projectID == "" {
 		log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
