@@ -75,7 +75,7 @@ func parsePage(page_link string) []string {
 func main() {
 	URL:="https://github.com/search?q=SEARCH_STRING_PLACEHOLDER"
 	p1URL:="https://github.com/search?p="
-	p2URL:="&q=gcp+datastore&type=Repositories"
+	p2URL:="&q=SEARCH_STRING_PLACEHOLDER&type=Repositories"
 	var number_of_pages int
 	var all_links_sli_temp []string
 	var all_links_sli []string
