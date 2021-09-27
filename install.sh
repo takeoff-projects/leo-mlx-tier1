@@ -52,7 +52,7 @@ go run init_database.go
 
 
 if [ -e main_sa.json ]; then
-        export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
+        export GOOGLE_APPLICATION_CREDENTIALS=$ROOT_PATH/terraform/main_sa.json
         echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
 else
         echo "Service account not created, we can't continue"
