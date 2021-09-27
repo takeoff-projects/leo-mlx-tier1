@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #########variables
-SEARCH_STRING="aws+eks"
+SEARCH_STRING="gcp+spanner"
 PeojectID="roi-takeoff-user7"
 GOOGLE_ACCOUNT="touser7@roigcp.com"
 ##################
@@ -47,6 +47,7 @@ cd $ROOT_PATH/webapplion
 go run init_database.go
 
 ###code to build image and push to registry
+gcloud builds submit --tag=gcr.io/$GOOGLE_CLOUD_PROJECT/github-search:v0.1 .
 ###code to deploy cloud run
 
 
@@ -58,4 +59,6 @@ else
         echo "Service account not created, we can't continue"
         exit 1
 fi
+
+gcloud run deploy --image=gcr.io/$GOOGLE_CLOUD_PROJECT/github-search:v0.1
 
