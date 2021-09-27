@@ -43,6 +43,14 @@ gcloud config set account $GOOGLE_ACCOUNT
 echo yes | gcloud datastore databases create --region=us-central
 echo yes | gcloud datastore indexes create $ROOT_PATH/index.yaml
 
+cd $ROOT_PATH/webapplion
+go run init_database.go
+
+###code to build image and push to registry
+###code to deploy cloud run
+
+
+
 if [ -e main_sa.json ]; then
         export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
         echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
@@ -51,7 +59,3 @@ else
         exit 1
 fi
 
-cd $ROOT_PATH/webapplion
-go run init_database.go
-###code to build image and push to registry
-###code to deploy cloud run
