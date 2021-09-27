@@ -25,5 +25,6 @@ require (
 	google.golang.org/genproto v0.0.0-20210226172003-ab064af71705 // indirect
 	google.golang.org/grpc v1.35.0 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
+	github.com/gorilla/mux v1.8.0 // indirect
 )
 
