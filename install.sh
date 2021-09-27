@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #########variables
-SEARCH_STRING="gcp+cloudrun"
+SEARCH_STRING="aws+eks"
 PeojectID="roi-takeoff-user7"
 ##################
 
@@ -35,17 +35,19 @@ sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" webapplion/init_database.
 
 cd terraform
 terraform init && terraform apply -auto-approve
-if [ -e main_sa.json ]; then
-	export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
-	echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
-else
-	echo "Service account not created, we can't continue"
-	exit 1
-fi
 
-gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+#gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+
 echo yes | gcloud datastore databases create --region=us-central
 echo yes | gcloud datastore indexes create $ROOT_PATH/index.yaml
+
+if [ -e main_sa.json ]; then
+        export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
+        echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
+else
+        echo "Service account not created, we can't continue"
+        exit 1
+fi
 
 cd $ROOT_PATH/webapplion
 go run init_database.go
