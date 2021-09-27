@@ -140,7 +140,7 @@ func GetDecs() ([]Decision, error) {
 }
 
 
-getItemsHandler(w http.ResponseWriter, r *http.Request) {
+func getItemsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: getItems")
 	var decs []Decision
         decs, error := GetDecs()
