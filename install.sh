@@ -9,8 +9,8 @@ if [ $GOOGLE_CLOUD_PROJECT == "" ]; then
 fi
 echo "projectID="$GOOGLE_CLOUD_PROJECT
 
-sed 's/ProjectID_PLACEHOLDER/${PeojectID}/' webapplion/.env > webapplion/.env
-sed 's/ProjectID_PLACEHOLDER/${PeojectID}/' terraform/main.tf > terraform/main.tf
+sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
+sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
 
 cd terraform
 #terraform init && terraform apply
