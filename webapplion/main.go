@@ -47,7 +47,7 @@ func main() {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	var decs []Decision
 	decs, error := GetDecs()
-	fmt.Println(decs)
+	fmt.Println(decs) //debug 
 	if error != nil {
 		fmt.Print(error)
 	}
@@ -122,7 +122,7 @@ func GetDecs() ([]Decision, error) {
 	}
 
 	// Create a query to fetch all Pet entities".
-	query := datastore.NewQuery("Decisions").Order("-added")
+	query := datastore.NewQuery("Decision").Order("-added")
 	keys, err := client.GetAll(ctx, query, &decs)
 	if err != nil {
 		fmt.Println(err)
