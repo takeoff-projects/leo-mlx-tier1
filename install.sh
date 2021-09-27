@@ -25,7 +25,7 @@ if [ $GOOGLE_CLOUD_PROJECT == "" ]; then
 	export GOOGLE_CLOUD_PROJECT=$PeojectID
 fi
 
-echo yes | gcloud auth application-default login
+gcloud auth application-default login
 echo "projectID="$GOOGLE_CLOUD_PROJECT
 
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
