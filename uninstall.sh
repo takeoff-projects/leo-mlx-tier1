@@ -29,7 +29,8 @@ fi
 gcloud auth application-default login
 ##Here should be code to drop cloud run instance
 ################################################
-cd ${ROOT_PATH}
+cd ${ROOT_PATH}/webapplion
+go run datastore_cleanup.go
 echo yes | gcloud datastore indexes cleanup index.yaml
 
 cd terraform
