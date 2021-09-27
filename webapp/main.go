@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"bytes"
 	"fmt"
 	"html/template"
@@ -38,6 +39,7 @@ func main() {
 	// The rest of the routes
 	mux.HandleFunc("/", indexHandler)
 	mux.HandleFunc("/about", aboutHandler)
+	mux.HandleFunc("/items", getItemsHandler).Methods("GET")
 
 
 	log.Printf("Webserver listening on Port: %s", port)
@@ -135,4 +137,15 @@ func GetDecs() ([]Decision, error) {
 
 	client.Close()
 	return decs, nil
+}
+
+
+getItemsHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Endpoint Hit: getItems")
+	var decs []Decision
+        decs, error := GetDecs()
+        if error != nil {
+                fmt.Print(error)
+        }
+	json.NewEncoder(w).Encode(decs)
 }

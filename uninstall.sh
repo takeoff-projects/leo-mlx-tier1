@@ -24,6 +24,7 @@ gcloud auth application-default login
 gcloud config set account $GOOGLE_ACCOUNT
 ##Here should be code to drop cloud run instance
 echo yes | gcloud run services delete github-search --region=GOOGLE_REGION_PLACEHOLDER
+### code to uninstall api gateway
 ################################################
 cd ${ROOT_PATH}/scripts
 go run datastore_cleanup.go

@@ -66,3 +66,5 @@ fi
 
 gcloud run deploy github-search --image=gcr.io/$GOOGLE_CLOUD_PROJECT/github-search:v0.1 --allow-unauthenticated --region=${GOOGLE_REGION}
 
+###code to install api gateway
+
