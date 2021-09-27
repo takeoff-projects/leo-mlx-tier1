@@ -44,12 +44,16 @@ func main() {
 		fmt.Println(err)
 	}
 
+	err = datastore.DeleteMulti(ctx, keys)
+	if err != nil {
+                fmt.Println(err)
+        }
 	// Set the id field on each Task from the corresponding key.
-	for _, key := range keys {
+	/*	for _, key := range keys {
 		err2 := datastore.Delete(ctx, key)
 		if err2 != nil {
 			fmt.Println(err2)
 		}
-	}
+	}*/
 
 }
