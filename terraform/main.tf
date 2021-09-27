@@ -23,6 +23,14 @@ resource "google_project_iam_member" "main_sa_role" {
   ]
 }
 
+resource "google_project_iam_member" "datastore_role" {
+  role   = "roles/datastore.owner"
+  member = "serviceAccount:${google_service_account.main_sa.email}"
+  depends_on = [
+    google_service_account.main_sa,
+  ]
+}
+
 resource "google_service_account_key" "main_sa_credentials" {
   service_account_id = "${google_service_account.main_sa.account_id}"
 }

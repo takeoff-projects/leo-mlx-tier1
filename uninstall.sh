@@ -25,12 +25,11 @@ else
         exit 1
 fi
 
-echo yes | gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-
+#echo yes | gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+gcloud auth application-default login
 ##Here should be code to drop cloud run instance
 ################################################
 cd ${ROOT_PATH}
 echo yes | gcloud datastore indexes cleanup index.yaml
-gcloud auth application-default login
 cd terraform
 terraform destroy -auto-approve
