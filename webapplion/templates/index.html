@@ -7,11 +7,11 @@
     <div class="row">
         <!--Card-->
         {{range .Decs}}
-        <div class="col-lg-4 col-md-12 mb-4">
+	<!--        <div class="col-lg-4 col-md-12 mb-4"> -->
             <div class="card">
 		    <div class="card-body">
 			    <p class=card-test>{{.Added}}</p>
-			    <p class="card-text">{{.Link}}</p>
+			    <p class="card-text"><a href={{.Link}}>{{.Link}}</a></p>
 		    </div>
                 </div>
             </div>
