@@ -1,5 +1,8 @@
 #!/bin/bash
 
+###variable
+GOOGLE_ACCOUNT=touser7@roigcp.com
+
 ###check if commands installed
 if ! terraform_installed="$(type -p "terraform")" || [[ -z $terraform_installed ]]; then
 	echo "terraform is not installed. Exiting..."
@@ -27,6 +30,7 @@ fi
 
 #echo yes | gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 gcloud auth application-default login
+gcloud config set account $GOOGLE_ACCOUNT
 ##Here should be code to drop cloud run instance
 ################################################
 cd ${ROOT_PATH}/webapplion
