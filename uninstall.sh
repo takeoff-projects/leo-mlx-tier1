@@ -24,7 +24,7 @@ gcloud auth application-default login
 gcloud config set account $GOOGLE_ACCOUNT
 ##Here should be code to drop cloud run instance
 ################################################
-cd ${ROOT_PATH}/webapplion
+cd ${ROOT_PATH}/scripts
 go run datastore_cleanup.go
 cd ${ROOT_PATH}
 echo yes | gcloud datastore indexes cleanup ${ROOT_PATH}/index.yaml

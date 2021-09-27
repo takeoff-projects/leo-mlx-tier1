@@ -32,7 +32,7 @@ echo "projectID="$GOOGLE_CLOUD_PROJECT
 
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
-sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" webapplion/init_database.go
+sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" scripts/init_database.go
 sed -i "s/GOOGLE_ACCOUNT_PLACEHOLDER/${GOOGLE_ACCOUNT}/" uninstall.sh
 
 cd terraform
@@ -43,9 +43,10 @@ gcloud config set account $GOOGLE_ACCOUNT
 echo yes | gcloud datastore databases create --region=us-central
 echo yes | gcloud datastore indexes create $ROOT_PATH/index.yaml
 
-cd $ROOT_PATH/webapplion
+cd $ROOT_PATH/scripts
 go run init_database.go
 
+cd $ROOT_PATH/webapp
 ###code to build image and push to registry
 gcloud builds submit --tag=gcr.io/$GOOGLE_CLOUD_PROJECT/github-search:v0.1 .
 ###code to deploy cloud run
