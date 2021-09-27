@@ -3,6 +3,7 @@
 #########variables
 SEARCH_STRING="aws+eks"
 PeojectID="roi-takeoff-user7"
+GOOGLE_ACCOUNT="touser7@roigcp.com"
 ##################
 
 
@@ -32,12 +33,13 @@ echo "projectID="$GOOGLE_CLOUD_PROJECT
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
 sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" webapplion/init_database.go
+sed -i "s/GOOGLE_ACCOUNT_PLACEHOLDER/${GOOGLE_ACCOUNT}/" uninstall.sh
 
 cd terraform
 terraform init && terraform apply -auto-approve
 
 #gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-
+gcloud config set account $GOOGLE_ACCOUNT
 echo yes | gcloud datastore databases create --region=us-central
 echo yes | gcloud datastore indexes create $ROOT_PATH/index.yaml
 
