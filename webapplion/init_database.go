@@ -28,16 +28,12 @@ func PutDecs(links []string) {
 		log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
 	}
 
-//	decs := make([]Decision, 200, 200)
 	ctx := context.Background()
 	client, err := datastore.NewClient(ctx, projectID)
 	defer client.Close()
 	if err != nil {
 		log.Fatalf("Could not create datastore client: %v", err)
 	}
-
-//	keys := []*datastore.Key{datastore.NameKey("Id", "Decision", nil)}
-//	keys := make([]*datastore.Key, 200, 200)
 
 	for i:=0; i<len(links); i++ {
 		k := datastore.NameKey("Decision", strconv.Itoa(i), nil)
@@ -48,20 +44,8 @@ func PutDecs(links []string) {
                 	log.Fatal(err2)
 	        }
 
-//		keys[i] = datastore.NewIncompleteKey(ctx, "Decision", nil)
-//		keys[i] = datastore.NewKey(ctx, "Decision", nil)
-/*		decs[i].Added = time.Now()
-		decs[i].Link  = links[i]
-		key, err3 := datastore.Put(ctx, datastore.NewIncompleteKey(ctx, "Decision", nil), decs[i])
-	        if err3 != nil {
-			log.Fatal(err3)
-	        }*/
 	}
 
-/*	_, err2 := client.PutMulti(ctx,  keys, decs)
-	if err2 != nil {
-		log.Fatal(err2)
-	}*/
 }
 
 
@@ -89,7 +73,7 @@ func parsePage(page_link string) []string {
 
 
 func main() {
-	URL:="https://github.com/search?q=gcp+datastore"
+	URL:="https://github.com/search?q=SEARCH_STRING_PLACEHOLDER"
 	p1URL:="https://github.com/search?p="
 	p2URL:="&q=gcp+datastore&type=Repositories"
 	var number_of_pages int

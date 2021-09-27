@@ -11,6 +11,7 @@ echo "projectID="$GOOGLE_CLOUD_PROJECT
 
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
+sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" webapplion/init_database.go
 
 cd terraform
 #terraform init && terraform apply
