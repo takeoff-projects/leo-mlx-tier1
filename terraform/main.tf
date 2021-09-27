@@ -1,6 +1,6 @@
 provider "google" {
 
-  project = "roi-takeoff-user7"
+  project = "ProjectID_PLACEHOLDER"
   region  = "multi-regional"
 }
 

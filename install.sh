@@ -1,16 +1,22 @@
 #!/bin/bash
 
 #########variables
+SEARCH_STRING="gcp+datastore"
+PeojectID="roi-takeoff-user7"
 ##################
 if [ $GOOGLE_CLOUD_PROJECT == "" ]; then
-	export GOOGLE_CLOUD_PROJECT=roi-takeoff-user7
+	export GOOGLE_CLOUD_PROJECT=$PeojectID
 fi
-echo $GOOGLE_CLOUD_PROJECT
+echo "projectID="$GOOGLE_CLOUD_PROJECT
+
+sed s/ProjectID_PLACEHOLDER/$PeojectID/ webapplion/.env
+sed s/ProjectID_PLACEHOLDER/$PeojectID/ terraform/main.tf
+
 cd terraform
 #terraform init && terraform apply
 if [ -e main_sa.json ]; then
 	export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
-	echo $GOOGLE_APPLICATION_CREDENTIALS
+	echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
 else
 	echo "Service account not created, we can't continue"
 	exit 1
