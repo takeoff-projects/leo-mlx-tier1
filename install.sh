@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#########variables
+SEARCH_STRING="gcp+spanner"
+PeojectID="roi-takeoff-user7"
+##################
+
+
 ###check if commands installed
 if ! terraform_installed="$(type -p "terraform")" || [[ -z $terraform_installed ]]; then
         echo "terraform is not installed. Exiting..."
@@ -16,11 +22,6 @@ fi
 
 ROOT_PATH=$(pwd)
 
-
-#########variables
-SEARCH_STRING="gcp+datastore"
-PeojectID="roi-takeoff-user7"
-##################
 if [ $GOOGLE_CLOUD_PROJECT == "" ]; then
 	export GOOGLE_CLOUD_PROJECT=$PeojectID
 fi
