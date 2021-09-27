@@ -25,7 +25,7 @@ else
         exit 1
 fi
 
-gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+echo yes | gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 
 ##Here should be code to drop cloud run instance
 ################################################
