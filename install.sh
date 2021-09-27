@@ -14,7 +14,7 @@ sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
 sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" webapplion/init_database.go
 
 cd terraform
-#terraform init && terraform apply
+terraform init && terraform apply
 if [ -e main_sa.json ]; then
 	export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
 	echo "serviceAccountKeyPath="$GOOGLE_APPLICATION_CREDENTIALS
