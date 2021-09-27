@@ -30,7 +30,7 @@ gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 ##Here should be code to drop cloud run instance
 ################################################
 cd ${ROOT_PATH}
-gcloud datastore cleanup-indexes index.yaml
+gcloud datastore indexes cleanup index.yaml
 gcloud auth application-default login
 cd terraform
 terraform destroy -auto-approve
