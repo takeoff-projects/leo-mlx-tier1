@@ -47,7 +47,6 @@ func main() {
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	var decs []Decision
 	decs, error := GetDecs()
-	fmt.Println(decs) //debug 
 	if error != nil {
 		fmt.Print(error)
 	}
