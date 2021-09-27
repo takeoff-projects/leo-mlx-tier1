@@ -4,6 +4,7 @@
 SEARCH_STRING="gcp+spanner"
 PeojectID="roi-takeoff-user7"
 GOOGLE_ACCOUNT="touser7@roigcp.com"
+GOOGLE_REGION="us-central1"
 ##################
 
 
@@ -32,8 +33,10 @@ echo "projectID="$GOOGLE_CLOUD_PROJECT
 
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/.env
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
+sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapplion/Dockerfile
 sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" scripts/init_database.go
 sed -i "s/GOOGLE_ACCOUNT_PLACEHOLDER/${GOOGLE_ACCOUNT}/" uninstall.sh
+sed -i "s/GOOGLE_REGION_PLACEHOLDER/${GOOGLE_REGION}/" uninstall.sh
 
 cd terraform
 terraform init && terraform apply -auto-approve
@@ -61,5 +64,5 @@ else
         exit 1
 fi
 
-gcloud run deploy --image=gcr.io/$GOOGLE_CLOUD_PROJECT/github-search:v0.1
+gcloud run deploy github-search --image=gcr.io/$GOOGLE_CLOUD_PROJECT/github-search:v0.1 --allow-unauthenticated --region=${GOOGLE_REGION}
 
