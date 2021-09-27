@@ -43,7 +43,7 @@ else
 	exit 1
 fi
 
-#gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 echo yes | gcloud datastore databases create --region=us-central
 echo yes | gcloud datastore indexes create $ROOT_PATH/index.yaml
 
