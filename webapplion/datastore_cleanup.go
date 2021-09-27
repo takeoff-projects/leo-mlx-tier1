@@ -45,8 +45,8 @@ func main() {
 	}
 
 	// Set the id field on each Task from the corresponding key.
-	for i, key := range keys {
-		err2 := datastore.Delete(ctx.key)
+	for _, key := range keys {
+		err2 := datastore.Delete(ctx, key)
 		if err2 != nil {
 			fmt.Println(err2)
 		}
