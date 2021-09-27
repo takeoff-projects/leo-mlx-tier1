@@ -31,4 +31,4 @@ echo yes | gcloud datastore indexes cleanup ${ROOT_PATH}/index.yaml
 
 cd ${ROOT_PATH}/terraform
 gcloud auth list
-terraform init && terraform destroy
+terraform init && terraform destroy -auto-approve
