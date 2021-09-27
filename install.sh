@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export GOOGLE_CLOUD_PROJECT=roi-takeoff-user7
-cd terrafrom
+cd terraform
 #terraform init && terraform apply
 if [ -e main_sa.json ]; then
 	export GOOGLE_APPLICATION_CREDENTIALS=$(pwd)/main_sa.json
