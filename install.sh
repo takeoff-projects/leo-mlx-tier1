@@ -1,6 +1,11 @@
 #!/bin/bash
 
-export GOOGLE_CLOUD_PROJECT=roi-takeoff-user7
+#########variables
+##################
+if [ $GOOGLE_CLOUD_PROJECT == "" ]; then
+	export GOOGLE_CLOUD_PROJECT=roi-takeoff-user7
+fi
+echo $GOOGLE_CLOUD_PROJECT
 cd terraform
 #terraform init && terraform apply
 if [ -e main_sa.json ]; then
