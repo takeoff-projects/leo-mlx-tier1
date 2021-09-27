@@ -31,6 +31,6 @@ gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 ################################################
 cd ${ROOT_PATH}
 echo yes | gcloud datastore indexes cleanup index.yaml
-gcloud auth application-default login
+echo yes | gcloud auth application-default login
 cd terraform
 terraform destroy -auto-approve

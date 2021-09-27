@@ -1,5 +1,22 @@
 #!/bin/bash
 
+###check if commands installed
+if ! terraform_installed="$(type -p "terraform")" || [[ -z $terraform_installed ]]; then
+        echo "terraform is not installed. Exiting..."
+        exit 1
+fi
+if ! go_installed="$(type -p "go")" || [[ -z $go_installed ]]; then
+        echo "go is not installed. Exiting..."
+        exit 1
+fi
+if ! gcloud_installed="$(type -p "go")" || [[ -z $gcloud_installed ]]; then
+        echo "gcloud is not installed. Exiting..."
+        exit 1
+fi
+
+ROOT_PATH=$(pwd)
+
+
 #########variables
 SEARCH_STRING="gcp+datastore"
 PeojectID="roi-takeoff-user7"
@@ -26,5 +43,10 @@ else
 fi
 
 gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-#gcloud datastore databases create --region=us-central
-#gcloud datastore indexes create index.yaml
+echo yes | gcloud datastore databases create --region=us-central
+echo yes | gcloud datastore indexes create index.yaml
+
+cd $ROOT_PATH/webapplion
+go run init_database.go
+###code to build image and push to registry
+###code to deploy cloud run
