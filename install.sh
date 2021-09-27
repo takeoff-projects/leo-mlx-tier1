@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #########variables
-SEARCH_STRING="gcp+spanner"
+SEARCH_STRING="gcp+cloudrun"
 PeojectID="roi-takeoff-user7"
 ##################
 
