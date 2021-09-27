@@ -52,7 +52,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	data := HomePageData{
-		PageTitle: "Kherson city council decisions ",
+		PageTitle: "Some search from github",
 		Decs: decs,
 	}
 
