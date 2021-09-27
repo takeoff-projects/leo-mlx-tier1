@@ -31,8 +31,9 @@ gcloud auth application-default login
 ################################################
 cd ${ROOT_PATH}/webapplion
 go run datastore_cleanup.go
-echo yes | gcloud datastore indexes cleanup index.yaml
+cd ${ROOT_PATH}
+echo yes | gcloud datastore indexes cleanup ${ROOT_PATH}/index.yaml
 
-cd terraform
+cd ${ROOT_PATH}/terraform
 gcloud auth list
 terraform init && terraform destroy
