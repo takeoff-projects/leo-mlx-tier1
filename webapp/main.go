@@ -155,7 +155,7 @@ func getItemsHandler(w http.ResponseWriter, r *http.Request) {
 func getItemByIdHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: getItemById")
 	vars := mux.Vars(r)
-	key := vars["id"]
+	key := datastore.NameKey("Decision", vars["id"], nil)
         projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
         if projectID == "" {
                 log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
@@ -168,7 +168,7 @@ func getItemByIdHandler(w http.ResponseWriter, r *http.Request) {
                 log.Fatalf("Could not create datastore client: %v", err)
         }
 
-	_, err2 := client.Get(ctx, key, dec)
+	err2 := client.Get(ctx, key, &dec)
         if err2 != nil {
                 fmt.Println(err2)
         }
