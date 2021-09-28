@@ -11,6 +11,7 @@ import (
 	"time"
 	"context"
 	"strconv"
+	"io/ioutil"
 	"github.com/gorilla/mux"
 
 	"cloud.google.com/go/datastore"
@@ -209,12 +210,13 @@ func deleteItemHandler(w http.ResponseWriter, r *http.Request) {
 
 func createItemHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: createItem")
-	vars := mux.Vars(r)
+	reqBody, _ := ioutil.ReadAll(r.Body)
 
 	var decs []Decision
 	var newdec Decision
+
+	json.Unmarshal(reqBody, &newdec)
 	newdec.Added = time.Now()
-	newdec.Link  = vars["Link"]
 
         decs, error := GetDecs()
         if error != nil {
