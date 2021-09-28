@@ -1,0 +1,86 @@
+swagger: '2.0'
+info:
+  title: api-gateway
+  description: API Gateway for github-search
+  version: 1.0.0
+schemes:
+  - https
+paths:
+  /items:
+    post:
+      summary: Add new item to collection
+      operationId: createItem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: request
+          in: body
+          description: content for new item
+          required: true
+          schema:
+            $ref: '#/definitions/Request'
+      responses:
+        503:
+          description: "internal error"
+        400:
+          description: "Invalid input"
+        200:
+          description: "OK"
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS          
+    get:
+      summary: Get all Items
+      operationId: getItems
+      produces:
+        - application/json
+      responses:
+        200:
+          description: "OK"
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS            
+  /items/{id}:
+    delete:
+      parameters:
+        - in: path
+          name: item
+          type: string
+          required: true
+          description: Delete Item by key
+      summary: deleteItem
+      operationId: deleteItemById
+      produces:
+        - application/json
+      responses:
+        200:
+          description: "OK"
+        400:
+          description: "Invalid key input"
+    get:
+      parameters:
+        - in: path
+          name: item
+          type: string
+          required: true
+          description: Item key value
+      summary: Item
+      operationId: getItemById
+      produces:
+        - application/json
+      responses:
+        200:
+          description: "OK"
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+
+definitions:
+  Request:
+    properties:
+      Link:
+        type: string
+    required:  
+      - Link

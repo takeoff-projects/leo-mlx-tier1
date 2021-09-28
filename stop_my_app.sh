@@ -22,9 +22,12 @@ ROOT_PATH=$(pwd)
 
 gcloud auth application-default login
 gcloud config set account $GOOGLE_ACCOUNT
+### code to uninstall api gateway
+gcloud beta api-gateway gateways delete github-search-api-gw --location=${GOOGLE_REGION}
+gcloud beta api-gateway api-configs delete github-search-config --api=github-search-api
+################################################
 ##Here should be code to drop cloud run instance
 echo yes | gcloud run services delete github-search --region=GOOGLE_REGION_PLACEHOLDER
-### code to uninstall api gateway
 ################################################
 cd ${ROOT_PATH}/scripts
 go run datastore_cleanup.go
