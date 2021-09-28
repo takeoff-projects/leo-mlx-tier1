@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #########variables
-SEARCH_STRING="gcp+spanner"
+SEARCH_STRING="gcp+anthos"
 PeojectID="roi-takeoff-user7"
 GOOGLE_ACCOUNT="touser7@roigcp.com"
 GOOGLE_REGION="us-central1"

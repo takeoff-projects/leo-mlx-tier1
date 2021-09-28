@@ -18,7 +18,7 @@ SEARCH_STRING variable used for search across github repos, you can specify any 
 
 To deploy application you can run this command:
 ```
-git clone https://github.com/takeoff-projects/leo-mlx-tier1.git && cd leo-mlx-tier1 && ./install.sh
+git clone https://github.com/takeoff-projects/leo-mlx-tier1.git && cd leo-mlx-tier1 && ./start_my_app.sh
 ```
 
 This command will ask for authentication in GCP
@@ -29,3 +29,6 @@ You can run this command in any terminal, however better use cloud shell
 
 To uninstall application run ./uninstall.sh script inside leo-mlx-tier1 folder.
 Uninstall script will ask GCP authentication as well.
+
+API endpoints:
+

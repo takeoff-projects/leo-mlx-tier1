@@ -43,6 +43,7 @@ func main() {
 	myRouter.HandleFunc("/items", getItemsHandler).Methods("GET")
 	myRouter.HandleFunc("/items/{id}", getItemByIdHandler).Methods("GET")
 	myRouter.HandleFunc("/items/{id}", deleteItemHandler).Methods("DELETE")
+	myRouter.HandleFunc("/items", createItemHandler).Methods("POST")
 
 
 	log.Printf("Webserver listening on Port: %s", port)
@@ -203,4 +204,38 @@ func deleteItemHandler(w http.ResponseWriter, r *http.Request) {
 	
 	response := map[string]string{"Name": vars["id"], "deleted": "yes"}
 	json.NewEncoder(w).Encode(response)
+}
+
+func createItemHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Endpoint Hit: createItem")
+	vars := mux.Vars(r)
+
+	var decs []Decision
+	var newdec Decision
+	newdec.Added = time.Now()
+	newdec.Link  = vars["link"]
+
+        decs, error := GetDecs()
+        if error != nil {
+                fmt.Print(error)
+        }
+	
+	key := datastore.NameKey("Decision", strconv.Itoa(len(decs)+1)+"api", nil)
+
+	projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
+        if projectID == "" {
+                log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
+        }
+
+        ctx := context.Background()
+        client, err := datastore.NewClient(ctx, projectID)
+        if err != nil {
+                log.Fatalf("Could not create datastore client: %v", err)
+        }
+
+	if _, err2 := client.Put(ctx, key, &newdec); err2 != nil {
+               	log.Fatal(err2)
+	}
+	json.NewEncoder(w).Encode(newdec)
+
 }
