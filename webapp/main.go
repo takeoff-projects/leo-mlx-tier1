@@ -41,6 +41,7 @@ func main() {
 	myRouter.HandleFunc("/", indexHandler)
 	myRouter.HandleFunc("/about", aboutHandler)
 	myRouter.HandleFunc("/items", getItemsHandler).Methods("GET")
+	myRouter.HandleFunc("/items/{id}", getItemByIdHandler).Methods("GET")
 
 
 	log.Printf("Webserver listening on Port: %s", port)
@@ -149,4 +150,29 @@ func getItemsHandler(w http.ResponseWriter, r *http.Request) {
                 fmt.Print(error)
         }
 	json.NewEncoder(w).Encode(decs)
+}
+
+func getItemByIdHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Endpoint Hit: getItemById")
+	vars := mux.Vars(r)
+	key := vars["id"]
+        projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
+        if projectID == "" {
+                log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
+        }
+
+	var dec Decision
+	ctx := context.Background()
+	client, err := datastore.NewClient(ctx, projectID)
+        if err != nil {
+                log.Fatalf("Could not create datastore client: %v", err)
+        }
+
+	_, err2 := client.Get(ctx, key, dec)
+        if err2 != nil {
+                fmt.Println(err2)
+        }
+
+	json.NewEncoder(w).Encode(dec)
+
 }
