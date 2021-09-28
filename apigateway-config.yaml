@@ -22,12 +22,12 @@ paths:
           schema:
             $ref: '#/definitions/Request'
       responses:
-        503:
-          description: "internal error"
-        400:
-          description: "Invalid input"
-        200:
-          description: "OK"
+        '503':
+          description: internal error
+        '400':
+          description: Invalid input
+        '200':
+          description: OK
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS          
@@ -37,8 +37,8 @@ paths:
       produces:
         - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS            
@@ -55,10 +55,10 @@ paths:
       produces:
         - application/json
       responses:
-        200:
-          description: "OK"
-        400:
-          description: "Invalid key input"
+        '200':
+          description: OK
+        '400':
+          description: Invalid key input
     get:
       parameters:
         - in: path
@@ -71,8 +71,8 @@ paths:
       produces:
         - application/json
       responses:
-        200:
-          description: "OK"
+        '200':
+          description: OK
       x-google-backend:
         address: BACKEND_URL_PLACEHOLDER
         path_translation: APPEND_PATH_TO_ADDRESS
