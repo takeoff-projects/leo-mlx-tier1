@@ -214,7 +214,7 @@ func createItemHandler(w http.ResponseWriter, r *http.Request) {
 	var decs []Decision
 	var newdec Decision
 	newdec.Added = time.Now()
-	newdec.Link  = vars["link"]
+	newdec.Link  = vars["Link"]
 
         decs, error := GetDecs()
         if error != nil {
