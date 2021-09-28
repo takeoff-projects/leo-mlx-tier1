@@ -30,6 +30,9 @@ You can run this command in any terminal, however better use cloud shell
 To uninstall application run ./uninstall.sh script inside leo-mlx-tier1 folder.
 Uninstall script will ask GCP authentication as well.
 
+
+Api gateway hostname(APPLICATION_URL in examples below) is showing in the end of output start_my_app.sh script
+
 API endpoints:
 
 /items, method GET - allows get all links from datastore
