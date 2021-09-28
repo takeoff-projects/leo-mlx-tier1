@@ -180,7 +180,7 @@ func getItemByIdHandler(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func deleteItemIdHandler(w http.ResponseWriter, r *http.Request) {
+func deleteItemHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: deleteItem")
 	vars := mux.Vars(r)
         key := datastore.NameKey("Decision", vars["id"], nil)
