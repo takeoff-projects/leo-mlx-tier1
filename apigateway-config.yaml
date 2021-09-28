@@ -46,7 +46,7 @@ paths:
     delete:
       parameters:
         - in: path
-          name: item
+          name: id
           type: string
           required: true
           description: Delete Item by key
@@ -59,10 +59,14 @@ paths:
           description: OK
         '400':
           description: Invalid key input
+      x-google-backend:
+        address: BACKEND_URL_PLACEHOLDER
+        path_translation: APPEND_PATH_TO_ADDRESS
+
     get:
       parameters:
         - in: path
-          name: item
+          name: id
           type: string
           required: true
           description: Item key value

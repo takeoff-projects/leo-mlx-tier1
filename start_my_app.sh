@@ -69,8 +69,8 @@ gcloud run deploy github-search --image=gcr.io/$GOOGLE_CLOUD_PROJECT/github-sear
 ###code to install api gateway
 
 BACKEND_URL=$(gcloud run services list | grep URL | awk '{print $2}')
-echo "BACKEND_URL="${BACKEND_URL}
-sed -i 's,BACKEND_URL_PLACEHOLDER,${BACKEND_URL},g' $ROOT_PATH/apigateway-config.yaml
+echo "BACKEND_URL="$BACKEND_URL
+sed -i "s,BACKEND_URL_PLACEHOLDER,$BACKEND_URL,g" $ROOT_PATH/apigateway-config.yaml
 gcloud api-gateway api-configs create github-search-config \
   --api=github-search-api --openapi-spec=$ROOT_PATH/apigateway-config.yaml \
   --project=$GOOGLE_CLOUD_PROJECT --backend-auth-service-account="main-sa@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com"
@@ -78,3 +78,5 @@ gcloud api-gateway api-configs create github-search-config \
 gcloud api-gateway gateways create github-search-api-gw \
   --api=github-search-api --api-config=github-search-config \
   --location=${GOOGLE_REGION} --project=$GOOGLE_CLOUD_PROJECT
+
+gcloud api-gateway gateways describe github-search-api-gw --location=${GOOGLE_REGION}
