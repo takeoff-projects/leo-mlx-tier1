@@ -35,8 +35,8 @@ sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapp/.env
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" terraform/main.tf
 sed -i "s/ProjectID_PLACEHOLDER/${PeojectID}/" webapp/Dockerfile
 sed -i "s/SEARCH_STRING_PLACEHOLDER/${SEARCH_STRING}/" scripts/init_database.go
-sed -i "s/GOOGLE_ACCOUNT_PLACEHOLDER/${GOOGLE_ACCOUNT}/" uninstall.sh
-sed -i "s/GOOGLE_REGION_PLACEHOLDER/${GOOGLE_REGION}/" uninstall.sh
+sed -i "s/GOOGLE_ACCOUNT_PLACEHOLDER/${GOOGLE_ACCOUNT}/" stop_my_app.sh
+sed -i "s/GOOGLE_REGION_PLACEHOLDER/${GOOGLE_REGION}/" stop_my_app.sh
 
 cd terraform
 terraform init && terraform apply -auto-approve
