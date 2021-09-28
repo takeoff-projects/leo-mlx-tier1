@@ -42,6 +42,7 @@ func main() {
 	myRouter.HandleFunc("/about", aboutHandler)
 	myRouter.HandleFunc("/items", getItemsHandler).Methods("GET")
 	myRouter.HandleFunc("/items/{id}", getItemByIdHandler).Methods("GET")
+	myRouter.HandleFunc("/items/{id}", deleteItemHandler).Methods("DELETE")
 
 
 	log.Printf("Webserver listening on Port: %s", port)
@@ -156,7 +157,8 @@ func getItemByIdHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint Hit: getItemById")
 	vars := mux.Vars(r)
 	key := datastore.NameKey("Decision", vars["id"], nil)
-        projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
+        
+	projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
         if projectID == "" {
                 log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
         }
@@ -172,7 +174,33 @@ func getItemByIdHandler(w http.ResponseWriter, r *http.Request) {
         if err2 != nil {
                 fmt.Println(err2)
         }
+	dec.Name = vars["id"]
 
 	json.NewEncoder(w).Encode(dec)
 
+}
+
+func deleteItemIdHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Endpoint Hit: deleteItem")
+	vars := mux.Vars(r)
+        key := datastore.NameKey("Decision", vars["id"], nil)
+	
+	projectID = os.Getenv("GOOGLE_CLOUD_PROJECT")
+        if projectID == "" {
+                log.Fatal(`You need to set the environment variable "GOOGLE_CLOUD_PROJECT"`)
+        }
+
+	ctx := context.Background()
+        client, err := datastore.NewClient(ctx, projectID)
+        if err != nil {
+                log.Fatalf("Could not create datastore client: %v", err)
+        }
+
+	err2 := client.Delete(ctx, key)
+	if err2 != nil {
+                fmt.Println(err2)
+        }
+	
+	response := map[string]string{"Name": vars["id"], "deleted": "yes"}
+	json.NewEncoder(w).Encode(response)
 }
