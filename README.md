@@ -32,3 +32,26 @@ Uninstall script will ask GCP authentication as well.
 
 API endpoints:
 
+/items, method GET - allows get all links from datastore
+example with curl:
+```
+curl https://APPLICATION_URL/items
+```
+
+/items/{id}, method GET - gets specific link from datastore
+example with curl:
+```
+curl https://APPLICATION_URL/items/14
+```
+
+/items/{id}, method DELETE - deletes specific link from datastore
+example with curl:
+```
+curl -X DELETE https://APPLICATION_URL/items/3
+```
+
+/items, method POST - allows to add new link to datastore
+example with curl:
+```
+curl -vv -X POST -H "Content-Type: application/json" -d '{"Link":"https://github.com/leo-mlx/fakelink"}' https://APPLICATION_URL/items
+```
